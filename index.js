@@ -1,7 +1,7 @@
 'use strict';
 const through = require('through');
 const inquirer = require('inquirer');
-const Observable = require('rxjs/Observable').Observable;
+const Observable = require('rxjs').Observable;
 
 module.exports = (question, options) => {
 	options = Object.assign({
@@ -51,6 +51,9 @@ module.exports = (question, options) => {
 			})
 			.then(() => {
 				observer.complete();
+			})
+			.catch(err => {
+				observer.error(err);
 			});
 
 		return outputStream;
