@@ -1,6 +1,6 @@
 {
   "name": "listr-input",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Input module for Listr",
   "license": "MIT",
   "repository": "SamVerschueren/listr-input",
