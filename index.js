@@ -27,7 +27,7 @@ module.exports = (question, options) => {
 		let buffer = '';
 
 		const outputStream = through(data => {
-			if (/\u001b\[.*?(D|C)/.test(data)) {
+			if (/\u001b\[.*?(D|C)$/.test(data)) {
 				if (buffer.length > 0) {
 					observer.next(buffer);
 					buffer = '';
