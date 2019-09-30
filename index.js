@@ -31,7 +31,7 @@ module.exports = (question, options) => {
 
 		const outputStream = through(data => {
 			// eslint-disable-next-line no-control-regex
-			if (/\u001b\[.*?(D|C)$/.test(data)) {
+			if (/\u001B\[.*?(D|C)$/.test(data)) {
 				if (buffer.length > 0) {
 					observer.next(buffer);
 					buffer = '';

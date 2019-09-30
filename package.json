@@ -10,7 +10,7 @@
     "url": "github.com/SamVerschueren"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "scripts": {
     "test": "xo && ava"
@@ -25,13 +25,13 @@
     "message"
   ],
   "dependencies": {
-    "inquirer": "^3.3.0",
+    "inquirer": "^7.0.0",
     "inquirer-autosubmit-prompt": "^0.2.0",
-    "rxjs": "^5.5.2",
+    "rxjs": "^6.5.3",
     "through": "^2.3.8"
   },
   "devDependencies": {
     "ava": "^0.23.0",
-    "xo": "*"
+    "xo": "^0.24.0"
   }
 }
