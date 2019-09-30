@@ -75,6 +75,13 @@ Type: `function`
 
 Function that will be invoked when the user has answered the question.
 
+##### autoSubmit
+
+Type: `function`
+
+Function which accepts the provided value. If returns `true` then the value will be submitted automatically.
+
+
 
 ## License
 

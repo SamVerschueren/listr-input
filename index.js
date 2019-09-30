@@ -1,7 +1,8 @@
 'use strict';
 const through = require('through');
 const inquirer = require('inquirer');
-const Observable = require('rxjs').Observable;
+const {Observable} = require('rxjs');
+const autosubmit = require('inquirer-autosubmit-prompt');
 
 module.exports = (question, options) => {
 	options = Object.assign({
@@ -15,11 +16,13 @@ module.exports = (question, options) => {
 
 	const questions = [
 		{
-			type: options.secret ? 'password' : 'input',
+			type: 'autosubmit',
 			name: 'result',
 			message: question,
+			secret: options.secret,
 			default: options.default,
-			validate: options.validate
+			validate: options.validate,
+			autoSubmit: options.autoSubmit
 		}
 	];
 
@@ -27,17 +30,20 @@ module.exports = (question, options) => {
 		let buffer = '';
 
 		const outputStream = through(data => {
+			// eslint-disable-next-line no-control-regex
 			if (/\u001b\[.*?(D|C)$/.test(data)) {
 				if (buffer.length > 0) {
 					observer.next(buffer);
 					buffer = '';
 				}
+
 				return;
 			}
 
 			buffer += data;
 		});
 
+		inquirer.registerPrompt('autosubmit', autosubmit);
 		const prompt = inquirer.createPromptModule({
 			output: outputStream
 		});
@@ -52,8 +58,8 @@ module.exports = (question, options) => {
 			.then(() => {
 				observer.complete();
 			})
-			.catch(err => {
-				observer.error(err);
+			.catch(error => {
+				observer.error(error);
 			});
 
 		return outputStream;
