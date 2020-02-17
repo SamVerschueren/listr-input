@@ -43,10 +43,10 @@ module.exports = (question, options) => {
 			buffer += data;
 		});
 
-		inquirer.registerPrompt('autosubmit', autosubmit);
 		const prompt = inquirer.createPromptModule({
 			output: outputStream
 		});
+		prompt.registerPrompt('autosubmit', autosubmit);
 
 		prompt(questions)
 			.then(answer => {
